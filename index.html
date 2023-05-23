@@ -9,23 +9,18 @@
   <body>
     <script>
       function countUniqueValues(arr) {
-        let left = 0;
-        let right = 1;
-
-        if (arr.length === 0) {
+        if (!arr.length) {
           return 0;
         }
-        console.log(arr);
-        while (right < arr.length) {
-          if (arr[left] === arr[right]) {
-            right++;
-          } else if (arr[left] !== arr[right]) {
-            left++;
-            arr.splice(arr[left], 1, arr[right]);
+
+        let i = 0;
+        for (let j = 1; j < arr.length; j++) {
+          if (arr[i] !== arr[j]) {
+            i++;
+            arr[i] = arr[j];
           }
-          console.log(arr);
         }
-        return left + 1;
+        return i + 1;
       }
 
       console.log(countUniqueValues([1, 1, 1, 1, 1, 2])); // 2
