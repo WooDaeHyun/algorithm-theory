@@ -8,19 +8,18 @@
   </head>
   <body>
     <script>
-      const selectionSort = (arr) => {
-        for (let i = 0; i < arr.length; i++) {
-          let minIndex = i;
-          for (let j = i + 1; j < arr.length; j++) {
-            if (arr[j] < arr[minIndex]) minIndex = j;
+      const insertionSort = (arr) => {
+        for (var i = 1; i < arr.length; i++) {
+          var currentValue = arr[i];
+          for (var j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
+            arr[j + 1] = arr[j];
           }
-          [[arr[i], arr[minIndex]]] = [[arr[minIndex], arr[i]]];
+          arr[j + 1] = currentValue;
         }
-
         return arr;
       };
 
-      console.log(selectionSort([3, 5, 1, 7, 43, 36, 2])); // [1, 2, 3, 5, 7, 26, 43]
+      console.log(insertionSort([3, 5, 1, 7, 43, 36, 2])); // [1, 2, 3, 5, 7, 26, 43]
     </script>
   </body>
 </html>
