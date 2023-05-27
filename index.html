@@ -8,20 +8,19 @@
   </head>
   <body>
     <script>
-      function subStringCounter(longString, subString) {
-        let count = 0;
-        for (let i = 0; i < longString.length; i++) {
-          for (let j = 0; j < subString.length; j++) {
-            if (longString[i + j] !== subString[j]) break;
-            if (j === subString.length - 1) {
-              count++;
-            }
+      const selectionSort = (arr) => {
+        for (let i = 0; i < arr.length; i++) {
+          let minIndex = i;
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIndex]) minIndex = j;
           }
+          [[arr[i], arr[minIndex]]] = [[arr[minIndex], arr[i]]];
         }
-        return count;
-      }
 
-      console.log(subStringCounter("omgomgomgmmoommoo", "omg"));
+        return arr;
+      };
+
+      console.log(selectionSort([3, 5, 1, 7, 43, 36, 2])); // [1, 2, 3, 5, 7, 26, 43]
     </script>
   </body>
 </html>
