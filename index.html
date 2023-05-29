@@ -8,39 +8,83 @@
   </head>
   <body>
     <script>
-      const pivot = (arr, start = 0, end = arr.length + 1) => {
-        const swap = (arr, i, j) => {
-          let temp = arr[i];
-          arr[i] = arr[j];
-          arr[j] = temp;
-        };
+      class Node {
+        constructor(value) {
+          this.value = value;
+          this.next = null;
+        }
+      }
 
-        let pivot = arr[start];
-        let swapIndex = start;
+      class SinglyLinkedList {
+        constructor() {
+          this.head = null;
+          this.tail = null;
+          this.length = 0;
+        }
 
-        for (let i = start + 1; i < arr.length; i++) {
-          if (pivot > arr[i]) {
-            swapIndex++;
-            swap(arr, swapIndex, i);
+        push(value) {
+          const newNode = new Node(value);
+          if (!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+          } else {
+            this.tail.next = newNode;
+            this.tail = newNode;
           }
+          this.length++;
+          return this;
         }
-        swap(arr, start, swapIndex);
 
-        return swapIndex;
-      };
-
-      console.log(pivot([3, 5, 9, 2, 1])); // 2
-
-      const quickSort = (arr, left = 0, right = arr.length - 1) => {
-        if (left < right) {
-          let pivotIndex = pivot(arr, left, right);
-          quickSort(arr, left, pivotIndex - 1);
-          quickSort(arr, pivotIndex + 1, right);
+        pop() {
+          if (!this.head) return undefined;
+          let currentNode = this.head;
+          let prevNode = currentNode;
+          while (currentNode.next) {
+            prevNode = currentNode;
+            currentNode = currentNode.next;
+          }
+          this.tail = prevNode;
+          this.tail.next = null;
+          this.length--;
+          if (this.length === 0) {
+            this.head = null;
+            this.tail = null;
+          }
+          return currentNode;
         }
-        return arr;
-      };
 
-      console.log(quickSort([3, 5, 9, 2, 1]));
+        Shift() {
+          if (!this.head) return undefined;
+          let currentHead = this.head;
+          this.head = currentHead.next;
+          this.length--;
+          if (this.length === 0) {
+            this.tail = null;
+          }
+          return currentHead;
+        }
+
+        unShift(value) {
+          let newNode = new Node(value);
+          if (!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+          } else {
+            newNode.next = this.head;
+            this.head = newNode;
+          }
+          this.length++;
+
+          return this;
+        }
+      }
+
+      const list = new SinglyLinkedList();
+      list.push("hello!");
+      list.push("woodae");
+      list.unShift(99);
+      list.Shift();
+      console.log(list);
     </script>
   </body>
 </html>
